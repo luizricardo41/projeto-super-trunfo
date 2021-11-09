@@ -4,36 +4,7 @@ import PropTypes from 'prop-types';
 class Form extends React.Component {
   constructor() {
     super();
-    // this.state = {
-    //   cardName: '',
-    //   cardDescription: '',
-    //   cardAttr1: '',
-    //   cardAttr2: '',
-    //   cardAttr3: '',
-    //   cardImage: '',
-    //   cardRare: '',
-    //   cardTrunfo: false,
-    //   hasTrunfo: false,
-    //   isSaveButtonDisabled: true,
-    // };
-    this.onInputChange = this.onInputChange.bind(this);
-  }
-
-  onInputChange({ target }) {
-    const { name } = target;
-    const value = (target.type === 'checkbox') ? target.checked : target.value;
-    console.log(name);
-    console.log(value);
-    // this.setState({ [name]: value }, () => {
-    //   const {
-    //     cardName, cardDescription, cardImage,
-    //   } = this.state;
-    //   if (cardName === '' || cardDescription === '' || cardImage === '') {
-    //     this.setState({ isSaveButtonDisabled: true });
-    //   } else {
-    //     this.setState({ isSaveButtonDisabled: false });
-    //   }
-    // });
+    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
   }
 
   onSaveButtonClick(event) {
@@ -68,7 +39,7 @@ class Form extends React.Component {
             value={ cardDescription }
             onChange={ onInputChange }
           >
-            Descreva aqui a carta a ser adicionada!
+            { cardDescription }
           </textarea>
         </label>
         <label htmlFor="cardAttr1">
