@@ -2,15 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 class Form extends React.Component {
-  constructor() {
-    super();
-    this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
-  }
-
-  onSaveButtonClick(event) {
-    event.preventDefault();
-  }
-
   render() {
     const {
       cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage, cardRare,
@@ -45,6 +36,8 @@ class Form extends React.Component {
         <label htmlFor="cardAttr1">
           Atributo 1:
           <input
+            min="0"
+            max="90"
             type="number"
             name="cardAttr1"
             data-testid="attr1-input"
@@ -55,6 +48,8 @@ class Form extends React.Component {
         <label htmlFor="cardAttr2">
           Atributo 2:
           <input
+            min="0"
+            max="90"
             type="number"
             name="cardAttr2"
             data-testid="attr2-input"
@@ -65,6 +60,8 @@ class Form extends React.Component {
         <label htmlFor="cardAttr3">
           Atributo 3:
           <input
+            min="0"
+            max="90"
             type="number"
             name="cardAttr3"
             data-testid="attr3-input"
@@ -103,6 +100,7 @@ class Form extends React.Component {
             data-testid="trunfo-input"
             checked={ cardTrunfo }
             onChange={ onInputChange }
+            id={ `${hasTrunfo}` }
           />
         </label>
         <button
