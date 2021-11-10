@@ -16,14 +16,18 @@ class App extends React.Component {
       cardTrunfo: false,
       hasTrunfo: false,
       isSaveButtonDisabled: true,
+      arrayCards: [],
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
     this.validationButton = this.validationButton.bind(this);
+    this.addNewCard = this.addNewCard.bind(this);
+    this.clearContents = this.clearContents.bind(this);
   }
 
   onSaveButtonClick(event) {
     event.preventDefault();
+    this.addNewCard(this.state);
   }
 
   onInputChange({ target }) {
@@ -31,6 +35,35 @@ class App extends React.Component {
     const value = (target.type === 'checkbox') ? target.checked : target.value;
     this.setState({ [name]: value }, () => {
       this.validationButton();
+    });
+  }
+
+  addNewCard(dataNewCard) {
+    const { arrayCards } = this.state;
+    if (arrayCards.length !== 0) {
+      this.setState((prevState) => ({
+        arrayCards: [...prevState.arrayCards, dataNewCard],
+      }));
+      this.clearContents();
+    } else {
+      this.setState({
+        arrayCards: [dataNewCard],
+      });
+    }
+    this.clearContents();
+  }
+
+  clearContents() {
+    this.setState({
+      cardName: '',
+      cardDescription: '',
+      cardAttr1: '0',
+      cardAttr2: '0',
+      cardAttr3: '0',
+      cardImage: '',
+      cardRare: '',
+      cardTrunfo: false,
+      isSaveButtonDisabled: true,
     });
   }
 
