@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Checkbox from './Checkbox';
 
 class Form extends React.Component {
   render() {
     const {
       cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage, cardRare,
-      cardTrunfo, hasTrunfo, isSaveButtonDisabled, onInputChange, onSaveButtonClick,
+      hasTrunfo, isSaveButtonDisabled, onInputChange, onSaveButtonClick, cardTrunfo,
     } = this.props;
 
     return (
@@ -93,15 +94,12 @@ class Form extends React.Component {
           </select>
         </label>
         <label htmlFor="cardTrunfo">
-          Super Trunfo:
-          <input
-            type="checkbox"
-            name="cardTrunfo"
-            data-testid="trunfo-input"
-            checked={ cardTrunfo }
-            onChange={ onInputChange }
-            id={ `${hasTrunfo}` }
+          { hasTrunfo === false ? <Checkbox
+            cardTrunfo={ cardTrunfo }
+            hasTrunfo={ hasTrunfo }
+            onInputChange={ onInputChange }
           />
+            : <span>Você já tem um Super Trunfo em seu baralho</span> }
         </label>
         <button
           type="submit"

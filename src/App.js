@@ -26,8 +26,14 @@ class App extends React.Component {
   }
 
   onSaveButtonClick(event) {
+    const { cardTrunfo } = this.state;
     event.preventDefault();
     this.addNewCard(this.state);
+    if (cardTrunfo === true) {
+      this.setState({
+        hasTrunfo: true,
+      });
+    }
   }
 
   onInputChange({ target }) {
@@ -44,7 +50,6 @@ class App extends React.Component {
       this.setState((prevState) => ({
         arrayCards: [...prevState.arrayCards, dataNewCard],
       }));
-      this.clearContents();
     } else {
       this.setState({
         arrayCards: [dataNewCard],
@@ -100,6 +105,7 @@ class App extends React.Component {
         cardTrunfo,
         hasTrunfo,
         isSaveButtonDisabled,
+        arrayCards,
       },
       onInputChange,
       onSaveButtonClick,
@@ -135,6 +141,7 @@ class App extends React.Component {
               isSaveButtonDisabled={ isSaveButtonDisabled }
               onInputChange={ onInputChange }
               onSaveButtonClick={ onSaveButtonClick }
+              arrayCards={ arrayCards }
             />
           </div>
         </div>
