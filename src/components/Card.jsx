@@ -11,6 +11,7 @@ class Card extends React.Component {
     return (
       <div className="card">
         <span
+          className="card-name"
           data-testid="name-card"
           value={ cardName }
         >
@@ -25,32 +26,41 @@ class Card extends React.Component {
           />
         </div>
         <span
+          className="description"
           data-testid="description-card"
         >
           { cardDescription }
         </span>
-        <span
-          data-testid="attr1-card"
-        >
-          { cardAttr1 }
-        </span>
-        <span
-          data-testid="attr2-card"
-        >
-          { cardAttr2 }
-        </span>
-        <span
-          data-testid="attr3-card"
-        >
-          { cardAttr3 }
-        </span>
-        <span
-          data-testid="rare-card"
-        >
-          { cardRare }
-        </span>
-        { (cardTrunfo === true) ? <span data-testid="trunfo-card">Super Trunfo</span>
-          : <span> </span> }
+        <div className="container-attr">
+          <span
+            className="card-attr"
+            data-testid="attr1-card"
+          >
+            Atributo 1:
+            <p>{cardAttr1}</p>
+          </span>
+          <span
+            className="card-attr"
+            data-testid="attr2-card"
+          >
+            Atributo 2:
+            <p>{cardAttr2}</p>
+          </span>
+          <span
+            className="card-attr"
+            data-testid="attr3-card"
+          >
+            Atributo 3:
+            <p>{cardAttr3}</p>
+          </span>
+          <span
+            className="card-rare"
+            data-testid="rare-card"
+          >
+            { cardRare }
+          </span>
+        </div>
+        { cardTrunfo && <p className="trunfo" data-testid="trunfo-card">Super Trunfo</p> }
       </div>
     );
   }

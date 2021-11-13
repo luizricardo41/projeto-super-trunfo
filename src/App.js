@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from './components/Card';
 import Form from './components/Form';
+import './card.css';
 
 class App extends React.Component {
   constructor() {
@@ -144,7 +145,7 @@ class App extends React.Component {
             />
           </div>
         </div>
-        <div>
+        <div className="container-card">
           {
             arrayCards.map((card) => (
               <div key={ card.cardName }>
