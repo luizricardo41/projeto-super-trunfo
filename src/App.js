@@ -2,6 +2,7 @@ import React from 'react';
 import Card from './components/Card';
 import Form from './components/Form';
 import './card.css';
+import DeleteButton from './components/DeleteButton';
 
 class App extends React.Component {
   constructor() {
@@ -24,6 +25,7 @@ class App extends React.Component {
     this.validationButton = this.validationButton.bind(this);
     this.addNewCard = this.addNewCard.bind(this);
     this.clearContents = this.clearContents.bind(this);
+    this.deleteCard = this.deleteCard.bind(this);
   }
 
   onSaveButtonClick(event) {
@@ -93,6 +95,24 @@ class App extends React.Component {
     return this.setState({ isSaveButtonDisabled: false });
   }
 
+  deleteCard({ target: { name } }) {
+    const { arrayCards } = this.state;
+    const deleteItems = arrayCards.find((card) => card.cardName === name);
+    const index = arrayCards.indexOf(deleteItems);
+    if (deleteItems.cardTrunfo === true) {
+      arrayCards.splice(index, 1);
+      this.setState({
+        arrayCards,
+        hasTrunfo: false,
+      });
+    } else {
+      arrayCards.splice(index, 1);
+      this.setState({
+        arrayCards,
+      });
+    }
+  }
+
   render() {
     const {
       state: {
@@ -110,6 +130,7 @@ class App extends React.Component {
       },
       onInputChange,
       onSaveButtonClick,
+      deleteCard,
     } = this;
 
     return (
@@ -158,6 +179,10 @@ class App extends React.Component {
                   cardImage={ card.cardImage }
                   cardRare={ card.cardRare }
                   cardTrunfo={ card.cardTrunfo }
+                />
+                <DeleteButton
+                  deleteCard={ deleteCard }
+                  cardName={ card.cardName }
                 />
               </div>
             ))
