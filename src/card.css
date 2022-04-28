@@ -1,18 +1,81 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
 body {
-  background-color: darkorange;
-  margin: 10px;
+  background-image: url("./images/bola-de-futebol.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  
+}
+
+.pageName {
+  text-align: center;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  font-size: 50px;
+  color: azure;
+  background-color: black;
+  border-radius: 50px;
 }
 
 .container-card {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.section-deck {
+  padding-top: 1.5rem;
+  text-align: center;
+}
+
+.filter-decks {
+  display: flex;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.filters h2, .filters label {
+  padding: 0.8rem;
+}
+
+.btn-filters {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0.8rem;
+}
+
+.btn-filters button {
+  margin: 0.5rem;
+}
+
+.deck {
   display: flex;
   flex-wrap: wrap;
 }
 
 .card {
-  border: solid black 2px;
+  border: 5px solid black;
+  background-image: url("./images/campo\ de\ futebol.jpg");
+  background-size: cover;
   display: flex;
   flex-direction: column;
-  height: 280px;
+  height: 345px;
   justify-content: space-between;
   margin: 10px;
   width: 230px;
@@ -20,12 +83,28 @@ body {
 
 .card-name {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
+  padding: 0.3rem;
+  background-color: rgba(240, 248, 255, 0.637);
+  margin: 0.4rem;
+  border-radius: 50px;
+  font-weight: bold;
+  border: 1px solid;
+}
+
+.div-description {
+  width: 100%;
 }
 
 .description {
-  display: flex;
-  justify-content: flex-start;
+  display: block;
+  background-color: rgba(240, 248, 255, 0.637);
+  border-radius: 30px;
+  text-align: center;
+  margin: 0.3rem;
+  padding: 0.4rem;
+  border: 1px solid;
+  overflow-wrap: break-word;
 }
 
 .container-attr {
@@ -37,16 +116,25 @@ body {
   align-items: center;
   display: flex;
   justify-content: space-between;
+  background-color: rgba(240, 248, 255, 0.637);
+  border: 1px solid;
+  border-radius: 30px;
+  margin: 0.3rem;
+  padding: 0.1rem 0.2rem;
 }
 
-p {
-  margin: 0;
-  padding: 5px;
+.container-card-rare {
+  display: flex;
+  justify-content: center;
 }
 
 .card-rare {
   display: flex;
   justify-content: center;
+  background-color: rgba(240, 248, 255, 0.637);
+  width: 50%;
+  border-radius: 30px;
+  border: 1px solid;
 }
 
 .trunfo {
@@ -54,14 +142,90 @@ p {
   border: solid black 2px;
   border-radius: 50%;
   display: flex;
-  height: 70px;
+  height: 60px;
   margin-left: 130px;
   margin-top: 40px;
   position: absolute;
   text-align: center;
-  width: 70px;
+  width: 60px;
+  background-color: rgba(240, 248, 255, 0.637);
+  font-weight: bold;
 }
 
 img {
   width: 100px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  font-weight: bold;
+}
+
+.name-input {
+  padding: 0.5rem;
+}
+
+.description-label {
+  padding: 0.5rem;
+}
+
+.attributes {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.5rem;
+}
+
+.attributes label {
+  padding: 0.5rem 0;
+}
+
+.attributes input {
+  width: 70%;
+}
+
+.attributes span {
+  padding-right: 2rem;
+}
+
+.insert-infos {
+  display: flex;
+  justify-content: space-around;
+}
+
+.attributes-2 {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.5rem;
+}
+
+.attributes-2 label {
+  padding: 0.5rem 0;
+}
+
+.attributes-2 input#url{
+  width: 100%;
+}
+
+.check-trunfo {
+  display: flex;
+}
+
+.check-trunfo p {
+  padding-right: 2rem;
+}
+
+.form button:disabled {
+  background-color: rgba(0, 102, 255, 0.308);
+}
+
+.form button {
+  font-weight: bold;
+  background-color: rgb(0, 102, 255);
+}
+
+.card-deck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
