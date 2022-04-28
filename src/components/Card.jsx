@@ -25,12 +25,14 @@ class Card extends React.Component {
             value={ cardImage }
           />
         </div>
-        <span
-          className="description"
-          data-testid="description-card"
-        >
-          { cardDescription }
-        </span>
+        <div className="div-description">
+          <p
+            className="description"
+            data-testid="description-card"
+          >
+            { cardDescription }
+          </p>
+        </div>
         <div className="container-attr">
           <span
             className="card-attr"
@@ -53,12 +55,14 @@ class Card extends React.Component {
             Atributo 3:
             <p>{cardAttr3}</p>
           </span>
-          <span
-            className="card-rare"
-            data-testid="rare-card"
-          >
-            { cardRare }
-          </span>
+          <div className="container-card-rare">
+            <span
+              className="card-rare"
+              data-testid="rare-card"
+            >
+              { cardRare }
+            </span>
+          </div>
         </div>
         { cardTrunfo && <p className="trunfo" data-testid="trunfo-card">Super Trunfo</p> }
       </div>
