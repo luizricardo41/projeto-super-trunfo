@@ -7,9 +7,10 @@ class Checkbox extends React.Component {
       cardTrunfo, hasTrunfo, onInputChange,
     } = this.props;
     return (
-      <span>
-        Super Trunfo:
+      <label htmlFor="cardTrunfo" className="check-trunfo">
+        <p>Super Trunfo?</p>
         <input
+          id="cardTrunfo"
           disabled={ hasTrunfo }
           type="checkbox"
           name="cardTrunfo"
@@ -17,7 +18,7 @@ class Checkbox extends React.Component {
           checked={ cardTrunfo }
           onChange={ onInputChange }
         />
-      </span>
+      </label>
     );
   }
 }
