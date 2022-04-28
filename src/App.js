@@ -3,8 +3,9 @@ import Card from './components/Card';
 import Form from './components/Form';
 import './card.css';
 import DeleteButton from './components/DeleteButton';
+import CardFilters from './components/CardFilters';
 
-class App extends React.Component {
+export default class App extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -19,6 +20,11 @@ class App extends React.Component {
       hasTrunfo: false,
       isSaveButtonDisabled: true,
       arrayCards: [],
+      arrayPrint: [],
+      filterName: '',
+      filterOn: false,
+      filterTrunfo: false,
+      filterRare: '',
     };
     this.onInputChange = this.onInputChange.bind(this);
     this.onSaveButtonClick = this.onSaveButtonClick.bind(this);
@@ -47,15 +53,58 @@ class App extends React.Component {
     });
   }
 
+  filter = (name) => {
+    const { arrayCards, filterTrunfo, filterRare } = this.state;
+    let arrayFilter = arrayCards.filter((card) => card.cardName === name);
+    if (filterTrunfo && name !== '' && filterRare !== '') {
+      arrayFilter = arrayCards
+        .filter((card) => card.cardRare === filterRare
+        && card.cardTrunfo === true && card.cardName === name);
+    }
+    if (filterTrunfo && filterRare !== '') {
+      arrayFilter = arrayCards
+        .filter((card) => card.cardRare === filterRare && card.cardTrunfo === true);
+    }
+    if (name !== '' && filterRare !== '') {
+      arrayFilter = arrayCards
+        .filter((card) => card.cardName === name && card.cardRare === filterRare);
+    }
+    if (filterRare !== '') {
+      arrayFilter = arrayCards.filter((card) => card.cardRare === filterRare);
+    }
+    if (filterTrunfo && name !== '') {
+      arrayFilter = arrayCards
+        .filter((card) => card.cardTrunfo === true && card.cardName === name);
+    }
+    if (filterTrunfo) {
+      arrayFilter = arrayCards
+        .filter((card) => card.cardTrunfo === true);
+    }
+    this.setState({
+      arrayPrint: [...arrayFilter],
+      filterOn: true,
+    });
+  }
+
+  removeFilter = () => {
+    const { arrayCards } = this.state;
+    this.setState({
+      arrayPrint: [...arrayCards],
+      filterOn: false,
+    });
+  }
+
   addNewCard(dataNewCard) {
     const { arrayCards } = this.state;
     if (arrayCards.length !== 0) {
       this.setState((prevState) => ({
         arrayCards: [...prevState.arrayCards, dataNewCard],
+        arrayPrint: [...prevState.arrayCards, dataNewCard],
       }));
     } else {
       this.setState({
         arrayCards: [dataNewCard],
+        arrayPrint: [dataNewCard],
       });
     }
     this.clearContents();
@@ -111,44 +160,23 @@ class App extends React.Component {
         arrayCards,
       });
     }
+    this.setState({ arrayPrint: arrayCards });
   }
 
   render() {
     const {
       state: {
-        cardName,
-        cardDescription,
-        cardAttr1,
-        cardAttr2,
-        cardAttr3,
-        cardImage,
-        cardRare,
-        cardTrunfo,
-        hasTrunfo,
-        isSaveButtonDisabled,
-        arrayCards,
-      },
-      onInputChange,
-      onSaveButtonClick,
-      deleteCard,
-    } = this;
+        cardName, cardDescription, cardAttr1, cardAttr2, cardAttr3, cardImage, cardRare,
+        cardTrunfo, hasTrunfo, isSaveButtonDisabled, filterOn, arrayPrint, filterName,
+        filterTrunfo, filterRare },
+      onInputChange, onSaveButtonClick, deleteCard, filter, removeFilter } = this;
 
     return (
       <div>
-        <h1>Tryunfo</h1>
-        <div>
-          <div>
-            <Card
-              cardName={ cardName }
-              cardDescription={ cardDescription }
-              cardAttr1={ cardAttr1 }
-              cardAttr2={ cardAttr2 }
-              cardAttr3={ cardAttr3 }
-              cardImage={ cardImage }
-              cardRare={ cardRare }
-              cardTrunfo={ cardTrunfo }
-            />
-          </div>
+        <header className="header">
+          <h1 className="pageName">Super Tryunfo</h1>
+        </header>
+        <div className="insert-infos">
           <div>
             <Form
               cardName={ cardName }
@@ -165,32 +193,57 @@ class App extends React.Component {
               onSaveButtonClick={ onSaveButtonClick }
             />
           </div>
+          <div>
+            <Card
+              cardName={ cardName }
+              cardDescription={ cardDescription }
+              cardAttr1={ cardAttr1 }
+              cardAttr2={ cardAttr2 }
+              cardAttr3={ cardAttr3 }
+              cardImage={ cardImage }
+              cardRare={ cardRare }
+              cardTrunfo={ cardTrunfo }
+            />
+          </div>
         </div>
         <div className="container-card">
-          {
-            arrayCards.map((card) => (
-              <div key={ card.cardName }>
-                <Card
-                  cardName={ card.cardName }
-                  cardDescription={ card.cardDescription }
-                  cardAttr1={ card.cardAttr1 }
-                  cardAttr2={ card.cardAttr2 }
-                  cardAttr3={ card.cardAttr3 }
-                  cardImage={ card.cardImage }
-                  cardRare={ card.cardRare }
-                  cardTrunfo={ card.cardTrunfo }
-                />
-                <DeleteButton
-                  deleteCard={ deleteCard }
-                  cardName={ card.cardName }
-                />
-              </div>
-            ))
-          }
+          <div className="section-deck"><h1>Todas as Cartas</h1></div>
+          <div className="filter-decks">
+            <div className="filters">
+              <CardFilters
+                filterName={ filterName }
+                onInputChange={ onInputChange }
+                filter={ filter }
+                filterOn={ filterOn }
+                removeFilter={ removeFilter }
+                arrayPrint={ arrayPrint }
+                filterTrunfo={ filterTrunfo }
+                filterRare={ filterRare }
+              />
+            </div>
+            <div className="deck">
+              { arrayPrint.map((card, index) => (
+                <div key={ `${card.cardName}${index}` } className="card-deck">
+                  <Card
+                    cardName={ card.cardName }
+                    cardDescription={ card.cardDescription }
+                    cardAttr1={ card.cardAttr1 }
+                    cardAttr2={ card.cardAttr2 }
+                    cardAttr3={ card.cardAttr3 }
+                    cardImage={ card.cardImage }
+                    cardRare={ card.cardRare }
+                    cardTrunfo={ card.cardTrunfo }
+                  />
+                  <DeleteButton
+                    deleteCard={ deleteCard }
+                    cardName={ card.cardName }
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     );
   }
 }
-
-export default App;
